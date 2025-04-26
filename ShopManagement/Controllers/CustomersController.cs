@@ -37,10 +37,10 @@ namespace ShopManagement.Controllers
                 {
                     list.Add(new Customers
                     {
-                        intCustomerID = Convert.ToInt32(dr["intEmployeeID"]),
-                        strCustomerName = dr["strFullName"].ToString(),
+                        intCustomerID = Convert.ToInt32(dr["intCustomerID"]),
+                        strCustomerName = dr["strCustomerName"].ToString(),
                         strAddress = dr["strAddress"].ToString(),
-                        strEmail = dr["strPosition"].ToString(),
+                        strEmail = dr["strEmail"].ToString(),
                         strPhone = dr["strPhone"].ToString(),
                     });
                 }
@@ -66,10 +66,10 @@ namespace ShopManagement.Controllers
                 {
                     list.Add(new Customers
                     {
-                        intCustomerID = Convert.ToInt32(dr["intEmployeeID"]),
-                        strCustomerName = dr["strFullName"].ToString(),
+                        intCustomerID = Convert.ToInt32(dr["intCustomerID"]),
+                        strCustomerName = dr["strCustomerName"].ToString(),
                         strAddress = dr["strAddress"].ToString(),
-                        strEmail = dr["strPosition"].ToString(),
+                        strEmail = dr["strEmail"].ToString(),
                         strPhone = dr["strPhone"].ToString(),
                     });
                 }
