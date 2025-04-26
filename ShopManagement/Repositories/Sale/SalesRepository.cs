@@ -27,6 +27,7 @@ namespace ShopManagement.Repositories.Sale
                 com.Parameters.AddWithValue("@intEmployeeID", sales.intEmployeeID);
                 com.Parameters.AddWithValue("@strPaymentMethod", sales.strPaymentMethod);
                 com.Parameters.AddWithValue("@strPaymentStatus", sales.strPaymentStatus);
+                
                 con.Open();
                 com.ExecuteNonQuery();
                 con.Close();
@@ -107,6 +108,7 @@ namespace ShopManagement.Repositories.Sale
                 com.Parameters.AddWithValue("@intEmployeeID", sales.intEmployeeID);
                 com.Parameters.AddWithValue("@strPaymentMethod", sales.strPaymentMethod);
                 com.Parameters.AddWithValue("@strPaymentStatus", sales.strPaymentStatus);
+                
                 con.Open();
                 com.ExecuteNonQuery();
                 con.Close();
@@ -133,6 +135,7 @@ namespace ShopManagement.Repositories.Sale
                 SqlCommand com = new SqlCommand("[sale].[sprSalesDelete]", con);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("@intSaleID", id);
+                
                 con.Open();
                 com.ExecuteNonQuery();
                 con.Close();

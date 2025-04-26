@@ -21,12 +21,17 @@ namespace ShopManagement.Repositories.Customer
             string msg = string.Empty;
             try
             {
-                SqlCommand cmd = new SqlCommand("[customer].[sprCustomersCreate]", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@strCustomerName", customers.strCustomerName);
-                cmd.Parameters.AddWithValue("@strPhone", customers.strPhone);
-                cmd.Parameters.AddWithValue("@strEmail", customers.strEmail);
-                cmd.Parameters.AddWithValue("@strAddress", customers.strAddress);
+                SqlCommand com = new SqlCommand("[customer].[sprCustomersCreate]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("@strCustomerName", customers.strCustomerName);
+                com.Parameters.AddWithValue("@strPhone", customers.strPhone);
+                com.Parameters.AddWithValue("@strEmail", customers.strEmail);
+                com.Parameters.AddWithValue("@strAddress", customers.strAddress);
+
+                con.Open();
+                com.ExecuteNonQuery();
+                con.Close();
+                msg = "SUCCESS";
             }
             catch (Exception ex)
             {
@@ -48,9 +53,9 @@ namespace ShopManagement.Repositories.Customer
             DataSet ds = new DataSet();
             try
             {
-                SqlCommand com = new SqlCommand("[customers].[sprCustomersRead]", con);
+                SqlCommand com = new SqlCommand("[customer].[sprCustomersRead]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intSupplierID", null);
+                com.Parameters.AddWithValue("@intCustomerID", null);
 
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds);
@@ -69,9 +74,9 @@ namespace ShopManagement.Repositories.Customer
             DataSet ds = new DataSet();
             try
             {
-                SqlCommand com = new SqlCommand("[customers].[sprCustomersRead]", con);
+                SqlCommand com = new SqlCommand("[customer].[sprCustomersRead]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intSupplierID", id);
+                com.Parameters.AddWithValue("@intCustomerID", id);
 
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds);
@@ -89,13 +94,18 @@ namespace ShopManagement.Repositories.Customer
             string msg = string.Empty;
             try
             {
-                SqlCommand cmd = new SqlCommand("[customer].[sprCustomersUpdate]", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@intCustomerID", id);
-                cmd.Parameters.AddWithValue("@strCustomerName", customers.strCustomerName);
-                cmd.Parameters.AddWithValue("@strPhone", customers.strPhone);
-                cmd.Parameters.AddWithValue("@strEmail", customers.strEmail);
-                cmd.Parameters.AddWithValue("@strAddress", customers.strAddress);
+                SqlCommand com = new SqlCommand("[custome].[sprCustomersUpdate]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("@intCustomerID", id);
+                com.Parameters.AddWithValue("@strCustomerName", customers.strCustomerName);
+                com.Parameters.AddWithValue("@strPhone", customers.strPhone);
+                com.Parameters.AddWithValue("@strEmail", customers.strEmail);
+                com.Parameters.AddWithValue("@strAddress", customers.strAddress);
+
+                con.Open();
+                com.ExecuteNonQuery();
+                con.Close();
+                msg = "SUCCESS";
             }
             catch (Exception ex)
             {
@@ -116,9 +126,14 @@ namespace ShopManagement.Repositories.Customer
             string msg = string.Empty;
             try
             {
-                SqlCommand com = new SqlCommand("[customers].[sprCustomersDelete]", con);
+                SqlCommand com = new SqlCommand("[customer].[sprCustomersDelete]", con);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("@intSupplierID", id);
+
+                con.Open();
+                com.ExecuteNonQuery();
+                con.Close();
+                msg = "SUCCESS";
             }
             catch (Exception ex)
             {
