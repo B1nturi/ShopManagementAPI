@@ -1,8 +1,13 @@
-﻿using System.Data;
+﻿/******************************************************************************
+ * Author:      Likhon
+ * Created:     April 24, 2025
+ * Description: Products API
+ ******************************************************************************/
+
+using System.Data;
 using Microsoft.AspNetCore.Mvc;
-using ShopManagement.Interfaces;
+using ShopManagement.Interfaces.Product;
 using ShopManagement.Models;
-using ShopManagement.Repositories.Product;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

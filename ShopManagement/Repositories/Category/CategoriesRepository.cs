@@ -7,7 +7,7 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
 using ShopManagement.Models;
-using ShopManagement.Interfaces;
+using ShopManagement.Interfaces.Category;
 
 namespace ShopManagement.Repositories.Category
 {

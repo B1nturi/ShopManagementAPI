@@ -1,34 +1,32 @@
 ﻿/******************************************************************************
  * Author:      Likhon
- * Created:     April 24, 2025
- * Description: Database connection and queries for Employees table
+ * Created:     April 26, 2025
+ * Description: Database connection and queries for Sales table
  ******************************************************************************/
 
 using Microsoft.Data.SqlClient;
-using System.Data;
+using ShopManagement.Interfaces.Sale;
 using ShopManagement.Models;
-using ShopManagement.Interfaces.Employee;
+using System.Data;
 
-namespace ShopManagement.Repositories.Employee
+namespace ShopManagement.Repositories.Sale
 {
-    public class EmployeesRepository : IEmployeesRepository
+    public class SalesRepository : ISalesRepository
     {
         SqlConnection con = new SqlConnection(
-           "Data Source=192.168.0.111;Initial Catalog=Likhon;User ID=developer;Password=123456;Trust Server Certificate=True");
+            "Data Source=192.168.0.111;Initial Catalog=Likhon;User ID=developer;Password=123456;Trust Server Certificate=True");
 
-        public string EmployeesPost(Employees employees)
+        public string SalesPost(Sales sales)
         {
             string msg = string.Empty;
             try
             {
-                SqlCommand com = new SqlCommand("[hr].[sprEmployeesCreate]", con);
+                SqlCommand com = new SqlCommand("[sale].[sprSalesCreate]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@strFullName", employees.strFullName);
-                com.Parameters.AddWithValue("@strPhone", employees.strPhone);
-                com.Parameters.AddWithValue("@strAddress", employees.strAddress);
-                com.Parameters.AddWithValue("@strPosition", employees.strPosition);
-                com.Parameters.AddWithValue("@dtrHireDate", employees.dtrHireDate);
-
+                com.Parameters.AddWithValue("@intCustomerID", sales.intCustomerID);
+                com.Parameters.AddWithValue("@intEmployeeID", sales.intEmployeeID);
+                com.Parameters.AddWithValue("@strPaymentMethod", sales.strPaymentMethod);
+                com.Parameters.AddWithValue("@strPaymentStatus", sales.strPaymentStatus);
                 con.Open();
                 com.ExecuteNonQuery();
                 con.Close();
@@ -47,63 +45,68 @@ namespace ShopManagement.Repositories.Employee
             }
             return msg;
         }
-
-        public DataSet EmployeesGet()
+        public DataSet SalesGet()
         {
             string msg = string.Empty;
             DataSet ds = new DataSet();
             try
             {
-                SqlCommand com = new SqlCommand("[hr].[sprEmployeesRead]", con);
+                SqlCommand com = new SqlCommand("[sale].[sprSalesRead]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intEmployeeID", null);
-
+                com.Parameters.AddWithValue("@intSaleID", null);
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds);
-                msg = "SUCCESS";
             }
             catch (Exception ex)
             {
                 msg = ex.Message;
             }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+            }
             return ds;
         }
-
-        public DataSet EmployeesGet(int id)
+        public DataSet SalesGet(int id)
         {
             string msg = string.Empty;
             DataSet ds = new DataSet();
             try
             {
-                SqlCommand com = new SqlCommand("[hr].[sprEmployeesRead]", con);
+                SqlCommand com = new SqlCommand("[sale].[sprSalesRead]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intEmployeeID", id);
-
+                com.Parameters.AddWithValue("@intSaleID", id);
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds);
-                msg = "SUCCESS";
             }
             catch (Exception ex)
             {
                 msg = ex.Message;
             }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+            }
             return ds;
         }
-
-        public string EmployeesUpdate(Employees employees, int id)
+        public string SalesUpdate(Sales sales, int id)
         {
             string msg = string.Empty;
             try
             {
-                SqlCommand com = new SqlCommand("[hr].[sprEmployeesUpdate]", con);
+                SqlCommand com = new SqlCommand("[sale].[sprSalesUpdate]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intEmployeeID", id);
-                com.Parameters.AddWithValue("@strFullName", employees.strFullName);
-                com.Parameters.AddWithValue("@strPhone", employees.strPhone);
-                com.Parameters.AddWithValue("@strAddress", employees.strAddress);
-                com.Parameters.AddWithValue("@strPosition", employees.strPosition);
-                com.Parameters.AddWithValue("@dtrHireDate", employees.dtrHireDate);
-
+                com.Parameters.AddWithValue("@intSupplierID", id);
+                com.Parameters.AddWithValue("@intCustomerID", sales.intCustomerID);
+                com.Parameters.AddWithValue("@intEmployeeID", sales.intEmployeeID);
+                com.Parameters.AddWithValue("@strPaymentMethod", sales.strPaymentMethod);
+                com.Parameters.AddWithValue("@strPaymentStatus", sales.strPaymentStatus);
                 con.Open();
                 com.ExecuteNonQuery();
                 con.Close();
@@ -122,16 +125,14 @@ namespace ShopManagement.Repositories.Employee
             }
             return msg;
         }
-        
-        public string EmployeesDelete(int id)
+        public string SalesDelete(int id)
         {
             string msg = string.Empty;
             try
             {
-                SqlCommand com = new SqlCommand("[hr].[sprEmployeesDelete]", con);
+                SqlCommand com = new SqlCommand("[sale].[sprSalesDelete]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intEmployeeID", id);
-
+                com.Parameters.AddWithValue("@intSaleID", id);
                 con.Open();
                 com.ExecuteNonQuery();
                 con.Close();

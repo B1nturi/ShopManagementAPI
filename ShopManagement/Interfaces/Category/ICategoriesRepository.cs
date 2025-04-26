@@ -7,7 +7,7 @@
 using System.Data;
 using ShopManagement.Models;
 
-namespace ShopManagement.Interfaces
+namespace ShopManagement.Interfaces.Category
 {
     public interface ICategoriesRepository
     {

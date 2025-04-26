@@ -1,13 +1,13 @@
 ﻿/******************************************************************************
  * Author:      Likhon
  * Created:     April 25, 2025
- * Description: Employee Interface
+ * Description: Employees Interface
  ******************************************************************************/
 
 using ShopManagement.Models;
 using System.Data;
 
-namespace ShopManagement.Interfaces
+namespace ShopManagement.Interfaces.Employee
 {
     public interface IEmployeesRepository
     {

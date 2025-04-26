@@ -7,7 +7,7 @@
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
-using ShopManagement.Interfaces;
+using ShopManagement.Interfaces.Customer;
 using ShopManagement.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -37,10 +37,10 @@ namespace ShopManagement.Controllers
                 {
                     list.Add(new Customers
                     {
-                        intCustomerID = Convert.ToInt32(dr["intEmployeeID"]),
-                        strCustomerName = dr["strFullName"].ToString(),
+                        intCustomerID = Convert.ToInt32(dr["intCustomerID"]),
+                        strCustomerName = dr["strCustomerName"].ToString(),
                         strAddress = dr["strAddress"].ToString(),
-                        strEmail = dr["strPosition"].ToString(),
+                        strEmail = dr["strEmail"].ToString(),
                         strPhone = dr["strPhone"].ToString(),
                     });
                 }
@@ -66,10 +66,10 @@ namespace ShopManagement.Controllers
                 {
                     list.Add(new Customers
                     {
-                        intCustomerID = Convert.ToInt32(dr["intEmployeeID"]),
-                        strCustomerName = dr["strFullName"].ToString(),
+                        intCustomerID = Convert.ToInt32(dr["intCustomerID"]),
+                        strCustomerName = dr["strCustomerName"].ToString(),
                         strAddress = dr["strAddress"].ToString(),
-                        strEmail = dr["strPosition"].ToString(),
+                        strEmail = dr["strEmail"].ToString(),
                         strPhone = dr["strPhone"].ToString(),
                     });
                 }
