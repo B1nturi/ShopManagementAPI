@@ -55,8 +55,10 @@ namespace ShopManagement.Repositories.Sale
                 SqlCommand com = new SqlCommand("[sale].[sprSalesRead]", con);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("@intSaleID", null);
+
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds);
+                msg = "SUCCESS";
             }
             catch (Exception ex)
             {
@@ -80,8 +82,10 @@ namespace ShopManagement.Repositories.Sale
                 SqlCommand com = new SqlCommand("[sale].[sprSalesRead]", con);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("@intSaleID", id);
+                
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds);
+                msg = "SUCCESS";
             }
             catch (Exception ex)
             {

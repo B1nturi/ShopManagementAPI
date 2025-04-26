@@ -29,7 +29,6 @@ namespace ShopManagement.Controllers
         {
             try
             {
-                Sales sales = new Sales();
                 DataSet ds = saleRepo.SalesGet();
                 List<Sales> list = new List<Sales>();
                 foreach (DataRow dr in ds.Tables[0].Rows)
@@ -61,7 +60,6 @@ namespace ShopManagement.Controllers
         {
             try
             {
-                Sales sales = new Sales();
                 DataSet ds = saleRepo.SalesGet(id);
                 List<Sales> list = new List<Sales>();
                 foreach (DataRow dr in ds.Tables[0].Rows)
