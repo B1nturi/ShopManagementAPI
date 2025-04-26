@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using ShopManagement.Models;
 using ShopManagement.Repositories.Supplier;
-using ShopManagement.Interfaces;
+using ShopManagement.Interfaces.Supplier;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

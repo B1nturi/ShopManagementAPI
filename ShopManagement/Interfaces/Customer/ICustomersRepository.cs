@@ -1,13 +1,13 @@
 ﻿/******************************************************************************
  * Author:      Likhon
  * Created:     April 25, 2025
- * Description: Suppliers interface
+ * Description: Customers interface
  ******************************************************************************/
 
 using ShopManagement.Models;
 using System.Data;
 
-namespace ShopManagement.Interfaces
+namespace ShopManagement.Interfaces.Customer
 {
     public interface ICustomersRepository
     {

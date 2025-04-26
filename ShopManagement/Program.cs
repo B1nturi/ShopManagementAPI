@@ -1,8 +1,14 @@
-using ShopManagement.Interfaces;
+using ShopManagement.Interfaces.Category;
+using ShopManagement.Interfaces.Customer;
+using ShopManagement.Interfaces.Employee;
+using ShopManagement.Interfaces.Product;
+using ShopManagement.Interfaces.Sale;
+using ShopManagement.Interfaces.Supplier;
 using ShopManagement.Repositories.Category;
 using ShopManagement.Repositories.Customer;
 using ShopManagement.Repositories.Employee;
 using ShopManagement.Repositories.Product;
+using ShopManagement.Repositories.Sale;
 using ShopManagement.Repositories.Supplier;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,7 +41,7 @@ builder.Services.AddScoped<IEmployeesRepository, EmployeesRepository>();
 builder.Services.AddScoped<ISuppliersRepository, SuppliersRepository>();
 builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 builder.Services.AddScoped<ICustomersRepository, CustomersRepository>();
-
+builder.Services.AddScoped<ISalesRepository, SalesRepository>();
 
 
 var app = builder.Build();

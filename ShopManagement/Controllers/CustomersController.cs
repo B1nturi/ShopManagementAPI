@@ -7,7 +7,7 @@
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
-using ShopManagement.Interfaces;
+using ShopManagement.Interfaces.Customer;
 using ShopManagement.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
