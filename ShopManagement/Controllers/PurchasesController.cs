@@ -1,12 +1,6 @@
-﻿/******************************************************************************
- * Author:      Likhon
- * Created:     April 26, 2025
- * Description: Sales API Controller
- ******************************************************************************/
-
-using System.Data;
+﻿using System.Data;
 using Microsoft.AspNetCore.Mvc;
-using ShopManagement.Interfaces.Sale;
+using ShopManagement.Interfaces.Purchase;
 using ShopManagement.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,32 +9,32 @@ namespace ShopManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SalesController : ControllerBase
+    public class PurchasesController : ControllerBase
     {
-        private readonly ISalesRepository saleRepo;
-        public SalesController(ISalesRepository saleRepo)
+        private readonly IPurchsesRepository purRepo;
+        public PurchasesController(IPurchsesRepository purRepo)
         {
-            this.saleRepo = saleRepo;
+            this.purRepo = purRepo;
         }
         string msg = string.Empty;
-        // GET: api/<SalesController>
+        // GET: api/<PurchasesController>
         [HttpGet]
-        public List<Sales> Get()
+        public List<Purchases> Get()
         {
             try
             {
-                DataSet ds = saleRepo.SalesGet();
-                List<Sales> list = new List<Sales>();
+                DataSet ds = purRepo.PurchasesGet();
+                List<Purchases> list = new List<Purchases>();
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
 
-                    list.Add(new Sales
+                    list.Add(new Purchases
                     {
-                        intSaleID = Convert.ToInt32(dr["intSaleID"]),
-                        intCustomerID = Convert.ToInt32(dr["intCustomerID"]),
+                        intPurchaseID = Convert.ToInt32(dr["intSaleID"]),
+                        intSupplierID = Convert.ToInt32(dr["intCustomerID"]),
                         intEmployeeID = Convert.ToInt32(dr["intEmployeeID"]),
-                        decTotalAmount = Convert.ToDecimal(dr["decTotalAmount"]),
-                        dtrSaleDate = dr["dtrSaleDate"].ToString(),
+                        decTotalCost = Convert.ToDecimal(dr["decTotalAmount"]),
+                        dtrPurchaseDate = dr["dtrSaleDate"].ToString(),
                         strPaymentMethod = dr["strPaymentMethod"].ToString(),
                         strPaymentStatus = dr["strPaymentStatus"].ToString(),
                     });
@@ -51,27 +45,27 @@ namespace ShopManagement.Controllers
             {
                 msg = ex.Message;
             }
-            return new List<Sales>();
+            return new List<Purchases>();
         }
 
-        // GET api/<SalesController>/5
+        // GET api/<PurchasesController>/5
         [HttpGet("{id}")]
-        public List<Sales> Get(int id)
+        public List<Purchases> Get(int id)
         {
             try
             {
-                DataSet ds = saleRepo.SalesGet(id);
-                List<Sales> list = new List<Sales>();
+                DataSet ds = purRepo.PurchasesGet();
+                List<Purchases> list = new List<Purchases>();
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
 
-                    list.Add(new Sales
+                    list.Add(new Purchases
                     {
-                        intSaleID = Convert.ToInt32(dr["intSaleID"]),
-                        intCustomerID = Convert.ToInt32(dr["intCustomerID"]),
+                        intPurchaseID = Convert.ToInt32(dr["intSaleID"]),
+                        intSupplierID = Convert.ToInt32(dr["intCustomerID"]),
                         intEmployeeID = Convert.ToInt32(dr["intEmployeeID"]),
-                        decTotalAmount = Convert.ToDecimal(dr["decTotalAmount"]),
-                        dtrSaleDate = dr["dtrSaleDate"].ToString(),
+                        decTotalCost = Convert.ToDecimal(dr["decTotalAmount"]),
+                        dtrPurchaseDate = dr["dtrSaleDate"].ToString(),
                         strPaymentMethod = dr["strPaymentMethod"].ToString(),
                         strPaymentStatus = dr["strPaymentStatus"].ToString(),
                     });
@@ -82,16 +76,16 @@ namespace ShopManagement.Controllers
             {
                 msg = ex.Message;
             }
-            return new List<Sales>();
+            return new List<Purchases>();
         }
 
-        // POST api/<SalesController>
+        // POST api/<PurchasesController>
         [HttpPost]
-        public void Post([FromBody] Sales sales)
+        public void Post([FromBody] Purchases purchases)
         {
             try
             {
-                msg = saleRepo.SalesPost(sales);
+                msg = purRepo.PurchasesPost(purchases);
             }
             catch (Exception ex)
             {
@@ -99,13 +93,13 @@ namespace ShopManagement.Controllers
             }
         }
 
-        // PUT api/<SalesController>/5
+        // PUT api/<PurchasesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Sales sales)
+        public void Put(int id, [FromBody] Purchases purchases)
         {
             try
             {
-                msg = saleRepo.SalesUpdate(sales, id);
+                msg = purRepo.PurchasesUpdate(purchases, id);
             }
             catch (Exception ex)
             {
@@ -113,13 +107,13 @@ namespace ShopManagement.Controllers
             }
         }
 
-        // DELETE api/<SalesController>/5
+        // DELETE api/<PurchasesController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             try
             {
-                msg = saleRepo.SalesDelete(id);
+                msg = purRepo.PurchasesDelete(id);
             }
             catch (Exception ex)
             {

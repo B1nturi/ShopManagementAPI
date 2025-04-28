@@ -6,7 +6,6 @@
 
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 using ShopManagement.Interfaces.Customer;
 using ShopManagement.Models;
 
@@ -30,7 +29,6 @@ namespace ShopManagement.Controllers
         {
             try
             {
-                Customers employees = new Customers();
                 DataSet ds = custRepo.CustomersGet();
                 List<Customers> list = new List<Customers>();
                 foreach (DataRow dr in ds.Tables[0].Rows)
@@ -59,7 +57,6 @@ namespace ShopManagement.Controllers
         {
             try
             {
-                Customers employees = new Customers();
                 DataSet ds = custRepo.CustomersGet(id);
                 List<Customers> list = new List<Customers>();
                 foreach (DataRow dr in ds.Tables[0].Rows)

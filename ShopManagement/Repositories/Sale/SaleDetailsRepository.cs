@@ -1,32 +1,31 @@
 ﻿/******************************************************************************
  * Author:      Likhon
- * Created:     April 25, 2025
- * Description: Database connection and queries for Suppliers table
+ * Created:     April 28, 2025
+ * Description: Database connection and queries for SaleDetails table
  ******************************************************************************/
 
 using Microsoft.Data.SqlClient;
 using System.Data;
+using ShopManagement.Interfaces.Sale;
 using ShopManagement.Models;
-using ShopManagement.Interfaces.Customer;
 
-namespace ShopManagement.Repositories.Customer
+namespace ShopManagement.Repositories.Sale
 {
-    public class CustomersRepository : ICustomersRepository
+    public class SaleDetailsRepository : ISaleDetailsRepository
     {
         SqlConnection con = new SqlConnection(
-           "Data Source=192.168.0.111;Initial Catalog=Likhon;User ID=developer;Password=123456;Trust Server Certificate=True");
+            "Data Source=192.168.0.111;Initial Catalog=Likhon;User ID=developer;Password=123456;Trust Server Certificate=True");
 
-        public string CustomersPost(Customers customers)
+        public string SaleDetailsPost(SaleDetails saleDetails)
         {
             string msg = string.Empty;
             try
             {
-                SqlCommand com = new SqlCommand("[customer].[sprCustomersCreate]", con);
+                SqlCommand com = new SqlCommand("[sale].[sprSaleDetailsCreate]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@strCustomerName", customers.strCustomerName);
-                com.Parameters.AddWithValue("@strPhone", customers.strPhone);
-                com.Parameters.AddWithValue("@strEmail", customers.strEmail);
-                com.Parameters.AddWithValue("@strAddress", customers.strAddress);
+                com.Parameters.AddWithValue("@intSaleID", saleDetails.intSaleID);
+                com.Parameters.AddWithValue("@intProductID", saleDetails.intProductID);
+                com.Parameters.AddWithValue("@intQuantity", saleDetails.intQuantity);
 
                 con.Open();
                 com.ExecuteNonQuery();
@@ -46,16 +45,15 @@ namespace ShopManagement.Repositories.Customer
             }
             return msg;
         }
-
-        public DataSet CustomersGet()
+        public DataSet SaleDetailsGet()
         {
             string msg = string.Empty;
             DataSet ds = new DataSet();
             try
             {
-                SqlCommand com = new SqlCommand("[customer].[sprCustomersRead]", con);
+                SqlCommand com = new SqlCommand("[sale].[sprSaleDetailsRead]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intCustomerID", null);
+                com.Parameters.AddWithValue("@intSaleDetailsID", null);
 
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds);
@@ -65,18 +63,24 @@ namespace ShopManagement.Repositories.Customer
             {
                 msg = ex.Message;
             }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+            }
             return ds;
         }
-        
-        public DataSet CustomersGet(int id)
+        public DataSet SaleDetailsGet(int id)
         {
             string msg = string.Empty;
             DataSet ds = new DataSet();
             try
             {
-                SqlCommand com = new SqlCommand("[customer].[sprCustomersRead]", con);
+                SqlCommand com = new SqlCommand("[sale].[sprSaleDetailsRead]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intCustomerID", id);
+                com.Parameters.AddWithValue("@intSaleDetailsID", id);
 
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds);
@@ -86,21 +90,26 @@ namespace ShopManagement.Repositories.Customer
             {
                 msg = ex.Message;
             }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+            }
             return ds;
         }
-
-        public string CustomersUpdate(Customers customers, int id)
+        public string SaleDetailsUpdate(SaleDetails saleDetails, int id)
         {
             string msg = string.Empty;
             try
             {
-                SqlCommand com = new SqlCommand("[custome].[sprCustomersUpdate]", con);
+                SqlCommand com = new SqlCommand("[sale].[sprSaleDetailsUpdate]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intCustomerID", id);
-                com.Parameters.AddWithValue("@strCustomerName", customers.strCustomerName);
-                com.Parameters.AddWithValue("@strPhone", customers.strPhone);
-                com.Parameters.AddWithValue("@strEmail", customers.strEmail);
-                com.Parameters.AddWithValue("@strAddress", customers.strAddress);
+                com.Parameters.AddWithValue("@intSaleDetailsID", id);
+                com.Parameters.AddWithValue("@intSaleID", saleDetails.intSaleID);
+                com.Parameters.AddWithValue("@intProductID", saleDetails.intProductID);
+                com.Parameters.AddWithValue("@intQuantity", saleDetails.intQuantity);
 
                 con.Open();
                 com.ExecuteNonQuery();
@@ -120,15 +129,14 @@ namespace ShopManagement.Repositories.Customer
             }
             return msg;
         }
-
-        public string CustomersDelete(int id)
+        public string SaleDetailsDelete(int id)
         {
             string msg = string.Empty;
             try
             {
-                SqlCommand com = new SqlCommand("[customer].[sprCustomersDelete]", con);
+                SqlCommand com = new SqlCommand("[sale].[sprSaleDetailsDelete]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intSupplierID", id);
+                com.Parameters.AddWithValue("@intSaleDetailsID", id);
 
                 con.Open();
                 com.ExecuteNonQuery();

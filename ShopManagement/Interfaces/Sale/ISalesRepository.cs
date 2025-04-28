@@ -1,7 +1,7 @@
 ﻿/******************************************************************************
  * Author:      Likhon
  * Created:     April 26, 2025
- * Description: Sales Repository Interface
+ * Description: SaleDetails Repository Interface
  ******************************************************************************/
 using ShopManagement.Models;
 using System.Data;
