@@ -36,7 +36,7 @@ namespace ShopManagement.Controllers
 
                     list.Add(new Sales
                     {
-                        intSaleId = Convert.ToInt32(dr["intSaleId"]),
+                        intSaleID = Convert.ToInt32(dr["intSaleID"]),
                         intCustomerID = Convert.ToInt32(dr["intCustomerID"]),
                         intEmployeeID = Convert.ToInt32(dr["intEmployeeID"]),
                         decTotalAmount = Convert.ToDecimal(dr["decTotalAmount"]),
@@ -67,7 +67,7 @@ namespace ShopManagement.Controllers
 
                     list.Add(new Sales
                     {
-                        intSaleId = Convert.ToInt32(dr["intSaleId"]),
+                        intSaleID = Convert.ToInt32(dr["intSaleID"]),
                         intCustomerID = Convert.ToInt32(dr["intCustomerID"]),
                         intEmployeeID = Convert.ToInt32(dr["intEmployeeID"]),
                         decTotalAmount = Convert.ToDecimal(dr["decTotalAmount"]),
