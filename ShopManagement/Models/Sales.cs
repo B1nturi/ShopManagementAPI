@@ -8,7 +8,7 @@ namespace ShopManagement.Models
 {
     public class Sales
     {
-        public int intSaleId { get; set; }
+        public int intSaleID { get; set; }
         public int intCustomerID { get; set; }
         public int intEmployeeID { get; set; }
         public string? dtrSaleDate { get; set; }

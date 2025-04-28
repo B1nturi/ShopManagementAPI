@@ -1,33 +1,33 @@
 ﻿/******************************************************************************
  * Author:      Likhon
- * Created:     April 26, 2025
- * Description: Database connection and queries for Sales table
+ * Created:     April 28, 2025
+ * Description: Database connection and queries for Purchases table
  ******************************************************************************/
 
 using Microsoft.Data.SqlClient;
-using ShopManagement.Interfaces.Sale;
+using ShopManagement.Interfaces.Purchase;
 using ShopManagement.Models;
 using System.Data;
 
-namespace ShopManagement.Repositories.Sale
+namespace ShopManagement.Repositories.Purchase
 {
-    public class PurchasesRepository : ISalesRepository
+    public class PurchasesRepository : IPurchsesRepository
     {
         SqlConnection con = new SqlConnection(
             "Data Source=192.168.0.111;Initial Catalog=Likhon;User ID=developer;Password=123456;Trust Server Certificate=True");
 
-        public string SalesPost(Sales sales)
+        public string PurchasesPost(Purchases purchases)
         {
             string msg = string.Empty;
             try
             {
-                SqlCommand com = new SqlCommand("[sale].[sprSalesCreate]", con);
+                SqlCommand com = new SqlCommand("[purchase].[sprPurchasesCreate]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intCustomerID", sales.intCustomerID);
-                com.Parameters.AddWithValue("@intEmployeeID", sales.intEmployeeID);
-                com.Parameters.AddWithValue("@strPaymentMethod", sales.strPaymentMethod);
-                com.Parameters.AddWithValue("@strPaymentStatus", sales.strPaymentStatus);
-                
+                com.Parameters.AddWithValue("@intCustomerID", purchases.intSupplierID);
+                com.Parameters.AddWithValue("@intEmployeeID", purchases.intEmployeeID);
+                com.Parameters.AddWithValue("@strPaymentMethod", purchases.strPaymentMethod);
+                com.Parameters.AddWithValue("@strPaymentStatus", purchases.strPaymentStatus);
+
                 con.Open();
                 com.ExecuteNonQuery();
                 con.Close();
@@ -46,15 +46,15 @@ namespace ShopManagement.Repositories.Sale
             }
             return msg;
         }
-        public DataSet SalesGet()
+        public DataSet PurchasesGet()
         {
             string msg = string.Empty;
             DataSet ds = new DataSet();
             try
             {
-                SqlCommand com = new SqlCommand("[sale].[sprSalesRead]", con);
+                SqlCommand com = new SqlCommand("[purchase].[sprPurchasesRead]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intSaleID", null);
+                com.Parameters.AddWithValue("@intPurchaseID", null);
 
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds);
@@ -73,15 +73,15 @@ namespace ShopManagement.Repositories.Sale
             }
             return ds;
         }
-        public DataSet SalesGet(int id)
+        public DataSet PurchasesGet(int id)
         {
             string msg = string.Empty;
             DataSet ds = new DataSet();
             try
             {
-                SqlCommand com = new SqlCommand("[sale].[sprSalesRead]", con);
+                SqlCommand com = new SqlCommand("[purchase].[sprPurchasesRead]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intSaleID", id);
+                com.Parameters.AddWithValue("@intPurchaseID", id);
                 
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds);
@@ -100,19 +100,19 @@ namespace ShopManagement.Repositories.Sale
             }
             return ds;
         }
-        public string SalesUpdate(Sales sales, int id)
+        public string PurchasesUpdate(Purchases purchases, int id)
         {
             string msg = string.Empty;
             try
             {
-                SqlCommand com = new SqlCommand("[sale].[sprSalesUpdate]", con);
+                SqlCommand com = new SqlCommand("[purchase].[sprPurchasesUpdate]", con);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("@intSupplierID", id);
-                com.Parameters.AddWithValue("@intCustomerID", sales.intCustomerID);
-                com.Parameters.AddWithValue("@intEmployeeID", sales.intEmployeeID);
-                com.Parameters.AddWithValue("@strPaymentMethod", sales.strPaymentMethod);
-                com.Parameters.AddWithValue("@strPaymentStatus", sales.strPaymentStatus);
-                
+                com.Parameters.AddWithValue("@intCustomerID", purchases.intSupplierID);
+                com.Parameters.AddWithValue("@intEmployeeID", purchases.intEmployeeID);
+                com.Parameters.AddWithValue("@strPaymentMethod", purchases.strPaymentMethod);
+                com.Parameters.AddWithValue("@strPaymentStatus", purchases.strPaymentStatus);
+
                 con.Open();
                 com.ExecuteNonQuery();
                 con.Close();
@@ -131,14 +131,14 @@ namespace ShopManagement.Repositories.Sale
             }
             return msg;
         }
-        public string SalesDelete(int id)
+        public string PurchasesDelete(int id)
         {
             string msg = string.Empty;
             try
             {
-                SqlCommand com = new SqlCommand("[sale].[sprSalesDelete]", con);
+                SqlCommand com = new SqlCommand("[purchase].[sprPurchasesDelete]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@intSaleID", id);
+                com.Parameters.AddWithValue("@intPurchaseID", id);
                 
                 con.Open();
                 com.ExecuteNonQuery();
